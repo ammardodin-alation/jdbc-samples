@@ -12,8 +12,8 @@ public class SQLServerSample {
 //    add("INSERT INTO visits(value) VALUES (1), (2), (3);");
     add(
             "SELECT * FROM visits;" + // This returns a result
-            "SELECT * FROM visits;" + // This errors
-            "SELECT * FROM ax;" + // This does not execute
+            "SELECT * FROM table_does_not_exist;" + // This errors
+            "SELECT * FROM visits;" + // This does not execute
             "SELECT * FROM visits;"); // This does not execute
   }};
   static final Logger LOGGER = Logger.getLogger(SQLServerSample.class.getName());
@@ -35,7 +35,7 @@ public class SQLServerSample {
 
     boolean hasResultSet;
 
-    try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=master;user=sa;password=password;encrypt=false;")) {
+    try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=master;user=sa;password=Passw0rd;encrypt=false;")) {
       LOGGER.info("Successfully connected");
       LOGGER.info("Autocommit " + connection.getAutoCommit());
       try (Statement statement = connection.createStatement()) {
