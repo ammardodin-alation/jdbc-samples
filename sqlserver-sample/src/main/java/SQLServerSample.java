@@ -12,8 +12,8 @@ public class SQLServerSample {
 //    add("INSERT INTO visits(value) VALUES (1), (2), (3);");
     add(
             "SELECT * FROM visits;" + // This returns a result
-            "SELECT * FROM table_does_not_exist;" + // This errors
-            "SELECT * FROM visits;" + // This does not execute
+            "SELECT * FROM visits;" + // This errors
+            "SELECT * FROM ax;" + // This does not execute
             "SELECT * FROM visits;"); // This does not execute
   }};
   static final Logger LOGGER = Logger.getLogger(SQLServerSample.class.getName());
@@ -85,7 +85,8 @@ public class SQLServerSample {
                 hasResultSet = statement.getMoreResults();
                 break;
               } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Errored getting the next result set | Error = " + e .getMessage());
+                LOGGER.log(Level.WARNING, "Errored getting the next result set | Error = " + e .getMessage());
+                LOGGER.log(Level.WARNING, "Attempting to skip and fetch next result set");
               }
             }
           }
